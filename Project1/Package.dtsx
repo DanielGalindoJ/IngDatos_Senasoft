@@ -11,8 +11,8 @@
   DTS:LocaleID="9226"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{4AFED126-578C-446F-A9F7-F66930E7EABC}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{4111434D-6F10-498C-8869-410AEB294A34}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -981,6 +981,21 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Ejecutar SQL"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{4749A025-5514-4BF0-9B1B-E572663F6E0D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Ejecutar SQL"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
@@ -997,7 +1012,11 @@
         <NodeLayout
           Size="180,42"
           Id="Package\Extracion Datos"
-          TopLeft="197,47" />
+          TopLeft="43,11" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Tarea Ejecutar SQL"
+          TopLeft="42,91" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1007,13 +1026,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="276,42"
-          Id="Package\Extracion Datos\Origen de ADO NET ADVENTUWORKS"
-          TopLeft="291.111111111111,103.333333333333" />
-        <NodeLayout
           Size="262,42"
           Id="Package\Extracion Datos\Destino de ADO NET DB ORDER DB"
           TopLeft="262.222222222222,241.111111111111" />
+        <NodeLayout
+          Size="276,42"
+          Id="Package\Extracion Datos\Origen de ADO NET ADVENTUWORKS"
+          TopLeft="291.111111111111,103.333333333333" />
         <EdgeLayout
           Id="Package\Extracion Datos.Paths[Salida de origen de ADO NET]"
           TopLeft="429.111111111111,145.333333333333">
@@ -1052,7 +1071,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Extracion Datos\Origen de ADO NET ADVENTUWORKS">
+    design-time-name="Package\Extracion Datos\Destino de ADO NET DB ORDER DB">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1060,7 +1079,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extracion Datos\Destino de ADO NET DB ORDER DB">
+    design-time-name="Package\Extracion Datos\Origen de ADO NET ADVENTUWORKS">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
