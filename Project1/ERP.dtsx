@@ -11,8 +11,8 @@
   DTS:LocaleID="9226"
   DTS:ObjectName="ERP"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{823C6966-BFAF-46E6-9BEC-F535B0DC00C6}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{3EFA8054-E34F-491D-AA67-E1B35E580803}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1230,6 +1230,539 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Perosn Address"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{8C4995A4-0E6F-4102-B396-35F316A5AC5E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Perosn Address"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Perosn Address\Columna derivada"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+              name="Columna derivada"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Perosn Address\Columna derivada.Inputs[Entrada de columna derivada]"
+                  description="Entrada en la transformación Columna derivada"
+                  name="Entrada de columna derivada">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Perosn Address\Columna derivada.Outputs[Salida de columna derivada]"
+                  description="Salida predeterminada de la transformación Columna derivada"
+                  exclusionGroup="1"
+                  name="Salida de columna derivada"
+                  synchronousInputId="Package\Perosn Address\Columna derivada.Inputs[Entrada de columna derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Perosn Address\Columna derivada.Outputs[Salida de columna derivada].Columns[SSISTrackID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Cálculo"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Perosn Address\Columna derivada.Outputs[Salida de columna derivada].Columns[SSISTrackID]"
+                      name="SSISTrackID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expresión de columna derivada"
+                          name="Expression">@[System::ServerExecutionID]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expresión descriptiva de columna derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::ServerExecutionID]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Perosn Address\Columna derivada.Outputs[Salida de error de columna derivada]"
+                  description="Salida de error de la transformación Columna derivada"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de columna derivada"
+                  synchronousInputId="Package\Perosn Address\Columna derivada.Inputs[Entrada de columna derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Perosn Address\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Perosn Address\Destino de ADO NET"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino de ADO NET"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"erp"."PersonAddress"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Perosn Address\Destino de ADO NET.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-KV939Q3.awn_stg_demo]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-KV939Q3.awn_stg_demo]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[AddressID]"
+                      cachedDataType="i4"
+                      cachedName="AddressID"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AddressID]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressID]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[AddressLine1]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="AddressLine1"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AddressLine1]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressLine1]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[City]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[StateProvinceID]"
+                      cachedDataType="i4"
+                      cachedName="StateProvinceID"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[StateProvinceID]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[StateProvinceID]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[PostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="PostalCode"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[PostalCode]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[PostalCode]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[rowguid]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[SSISTrackID]"
+                      cachedDataType="i8"
+                      cachedName="SSISTrackID"
+                      externalMetadataColumnId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[SSISTrackId]"
+                      lineageId="Package\Perosn Address\Columna derivada.Outputs[Salida de columna derivada].Columns[SSISTrackID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[BusinessEntityID]"
+                      dataType="i4"
+                      name="BusinessEntityID" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AddressID]"
+                      dataType="i4"
+                      name="AddressID" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AddressTypeID]"
+                      dataType="i4"
+                      name="AddressTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AddressLine1]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine1" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[StateProvinceID]"
+                      dataType="i4"
+                      name="StateProvinceID" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[Created_Dt]"
+                      dataType="dbTimeStamp"
+                      name="Created_Dt" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[SSISTrackId]"
+                      dataType="i4"
+                      name="SSISTrackId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Perosn Address\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Perosn Address\Origen de ADO NET"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen de ADO NET"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"Person"."Address"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Perosn Address\Origen de ADO NET.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexion Origen.AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexion Origen.AdventureWorks2014]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[AddressID]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressID]"
+                      name="AddressID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressLine1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[AddressLine1]"
+                      length="60"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressLine1]"
+                      name="AddressLine1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressLine2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[AddressLine2]"
+                      length="60"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[AddressLine2]"
+                      name="AddressLine2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[City]"
+                      length="30"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[StateProvinceID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[StateProvinceID]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[StateProvinceID]"
+                      name="StateProvinceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[PostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[PostalCode]"
+                      length="15"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[PostalCode]"
+                      name="PostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[SpatialLocation]"
+                      dataType="image"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[SpatialLocation]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[SpatialLocation]"
+                      name="SpatialLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[rowguid]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[AddressID]"
+                      dataType="i4"
+                      name="AddressID" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[AddressLine1]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine1" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[AddressLine2]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine2" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[StateProvinceID]"
+                      dataType="i4"
+                      name="StateProvinceID" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[SpatialLocation]"
+                      dataType="image"
+                      name="SpatialLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[AddressID]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[AddressID]"
+                      name="AddressID" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[AddressLine1]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[AddressLine1]"
+                      name="AddressLine1" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[AddressLine2]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[AddressLine2]"
+                      name="AddressLine2" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[City]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[StateProvinceID]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[StateProvinceID]"
+                      name="StateProvinceID" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[PostalCode]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[PostalCode]"
+                      name="PostalCode" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[SpatialLocation]"
+                      dataType="image"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[SpatialLocation]"
+                      name="SpatialLocation" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Perosn Address.Paths[Salida de columna derivada]"
+              endId="Package\Perosn Address\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de columna derivada"
+              startId="Package\Perosn Address\Columna derivada.Outputs[Salida de columna derivada]" />
+            <path
+              refId="Package\Perosn Address.Paths[Salida de origen de ADO NET]"
+              endId="Package\Perosn Address\Columna derivada.Inputs[Entrada de columna derivada]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Perosn Address\Origen de ADO NET.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Person"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarea Flujo de datos"
@@ -1968,6 +2501,23 @@
           SQLTask:SqlStatementSource="truncate table [erp].[Person]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Table PerosnAddress"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{4C046FE1-B7C1-4ED3-B265-DFEB5673FB20}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Table PerosnAddress"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D1BF768-9D4C-4E02-AB35-B111CFE1B804}"
+          SQLTask:SqlStatementSource="truncate table [erp].[PersonAddress]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -2002,6 +2552,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 3"
       DTS:To="Package\Person" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{8447FD75-5EBE-4E3A-90C2-9CA566A53ED5}"
+      DTS:From="Package\Truncate Table PerosnAddress"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 4"
+      DTS:To="Package\Perosn Address" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
@@ -2175,6 +2733,48 @@
                     Point3="-90.75,24.25" />
                   <mssgle:LineSegment
                     End="-90.75,33" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Truncate Table PerosnAddress"
+          TopLeft="52.5,161.25" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Perosn Address"
+          TopLeft="26.25,240" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 4]"
+          TopLeft="168,203.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-63.25,36.75"
+              Start="0,0"
+              End="-63.25,29.25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.375" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.375"
+                    Point2="0,18.375"
+                    Point3="-4,18.375" />
+                  <mssgle:LineSegment
+                    End="-59.25,18.375" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-59.25,18.375"
+                    Point2="-63.25,18.375"
+                    Point3="-63.25,22.375" />
+                  <mssgle:LineSegment
+                    End="-63.25,29.25" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2572,6 +3172,110 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Person\Destino de ADO NET">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Perosn Address">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Perosn Address\Origen de ADO NET"
+          TopLeft="85,39" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Perosn Address\Columna derivada"
+          TopLeft="375,76" />
+        <EdgeLayout
+          Id="Package\Perosn Address.Paths[Salida de origen de ADO NET]"
+          TopLeft="264,60">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111,37"
+              Start="0,0"
+              End="103.5,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="51.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.5,0"
+                    Point2="55.5,0"
+                    Point3="55.5,4" />
+                  <mssgle:LineSegment
+                    End="55.5,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5,33"
+                    Point2="55.5,37"
+                    Point3="59.5,37" />
+                  <mssgle:LineSegment
+                    End="103.5,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Perosn Address\Destino de ADO NET"
+          TopLeft="154,159" />
+        <EdgeLayout
+          Id="Package\Perosn Address.Paths[Salida de columna derivada]"
+          TopLeft="459,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-213.5,41"
+              Start="0,0"
+              End="-213.5,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="-4,20.5" />
+                  <mssgle:LineSegment
+                    End="-209.5,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-209.5,20.5"
+                    Point2="-213.5,20.5"
+                    Point3="-213.5,24.5" />
+                  <mssgle:LineSegment
+                    End="-213.5,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Perosn Address\Origen de ADO NET">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Perosn Address\Destino de ADO NET">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
